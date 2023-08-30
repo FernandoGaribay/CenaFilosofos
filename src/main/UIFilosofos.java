@@ -14,7 +14,6 @@ public class UIFilosofos extends javax.swing.JFrame {
         initComponents();
         objMesa = new Mesa(this);
         objImagen = new ImageHandler("/imagenes/");
-        objMesa.iniciar();
 
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
@@ -44,6 +43,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         imgFilosofo3 = new javax.swing.JLabel();
         imgFilosofo4 = new javax.swing.JLabel();
         imgFilosofo5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -111,6 +111,14 @@ public class UIFilosofos extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 450, 390));
 
+        jButton1.setText("Iniciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,6 +133,10 @@ public class UIFilosofos extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        objMesa.iniciar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void actualizarUI() {
         pensarFilosofo(0);
@@ -225,6 +237,7 @@ public class UIFilosofos extends javax.swing.JFrame {
     private javax.swing.JLabel imgFilosofo3;
     private javax.swing.JLabel imgFilosofo4;
     private javax.swing.JLabel imgFilosofo5;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
