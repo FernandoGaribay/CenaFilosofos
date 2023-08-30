@@ -1,30 +1,23 @@
 package main;
 
-import java.util.concurrent.Semaphore;
-
 public class Mesa {
 
     public UIFilosofos objUI;
     public boolean[] filosofosComiendo;
-    private Semaphore maxComiendo;
-
-    public Mesa(UIFilosofos objUI){
-        this.objUI = objUI;
-        maxComiendo = new Semaphore(2);
-    }
     
-    public void iniciar() {
-        int numFilosofos = 5;
-        filosofosComiendo = new boolean[numFilosofos];
+    public Mesa(UIFilosofos objUI) {
+        this.objUI = objUI;
+    }
 
-        for (int i = 0; i < numFilosofos; i++) {
+    public void iniciar() {
+        filosofosComiendo = new boolean[5];
+        for (int i = 0; i < 5; i++) {
             filosofosComiendo[i] = false;
         }
+        MonitorTenedores monitor = new MonitorTenedores();
 
-        MonitorTenedores monitor = new MonitorTenedores(numFilosofos);
-
-        for (int i = 0; i < numFilosofos; i++) {
-            Thread filosofoThread = new Thread(new Filosofo(i, monitor, this, maxComiendo));
+        for (int i = 0; i < 5; i++) {
+            Thread filosofoThread = new Thread(new Filosofo(i, monitor, this));
             filosofoThread.start();
         }
     }

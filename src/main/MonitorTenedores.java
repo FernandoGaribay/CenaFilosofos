@@ -6,9 +6,9 @@ public class MonitorTenedores {
 
     private final Semaphore[] tenedores;
 
-    public MonitorTenedores(int numTenedores) {
-        tenedores = new Semaphore[numTenedores];
-        for (int i = 0; i < numTenedores; i++) {
+    public MonitorTenedores() {
+        tenedores = new Semaphore[5];
+        for (int i = 0; i < 5; i++) {
             tenedores[i] = new Semaphore(1); // Inicialmente todos los tenedores están disponibles
         }
     }

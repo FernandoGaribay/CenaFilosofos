@@ -2,17 +2,25 @@ package main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class UIFilosofos extends javax.swing.JFrame {
 
-    private ImageHandler objImagen;
-    private Mesa objMesa;
+    private final ImageHandler objImagen;
+    private final Mesa objMesa;
 
     public UIFilosofos() {
         initComponents();
         objMesa = new Mesa(this);
         objImagen = new ImageHandler("/imagenes/");
         objMesa.iniciar();
+
+        imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
+        imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
+        imgFilosofo3.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
+        imgFilosofo4.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
+        imgFilosofo5.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
     }
 
     @SuppressWarnings("unchecked")
@@ -43,8 +51,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tenedor1.setBackground(new java.awt.Color(240, 240, 240));
@@ -55,7 +62,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jLabel2.setText("[1]");
         tenedor1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jPanel2.add(tenedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 75, -1, 30));
+        jPanel2.add(tenedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 30, 30));
 
         tenedor2.setBackground(new java.awt.Color(240, 240, 240));
         tenedor2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,7 +72,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jLabel3.setText("[2]");
         tenedor2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jPanel2.add(tenedor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 170, 30, 30));
+        jPanel2.add(tenedor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 30, 30));
 
         tenedor3.setBackground(new java.awt.Color(240, 240, 240));
         tenedor3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,7 +82,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jLabel1.setText("[3]");
         tenedor3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jPanel2.add(tenedor3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 30, 30));
+        jPanel2.add(tenedor3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 30, 30));
 
         tenedor4.setBackground(new java.awt.Color(240, 240, 240));
         tenedor4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,7 +92,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jLabel5.setText("[4]");
         tenedor4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jPanel2.add(tenedor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 30, 30));
+        jPanel2.add(tenedor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 30, 30));
 
         tenedor5.setBackground(new java.awt.Color(240, 240, 240));
         tenedor5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,20 +102,20 @@ public class UIFilosofos extends javax.swing.JFrame {
         jLabel4.setText("[5]");
         tenedor5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jPanel2.add(tenedor5, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 170, 30, 30));
-        jPanel2.add(imgFilosofo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 60, 60));
-        jPanel2.add(imgFilosofo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 60, 60));
-        jPanel2.add(imgFilosofo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 60, 60));
-        jPanel2.add(imgFilosofo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 60, 60));
-        jPanel2.add(imgFilosofo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 60, 60));
+        jPanel2.add(tenedor5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 30, 30));
+        jPanel2.add(imgFilosofo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 60, 60));
+        jPanel2.add(imgFilosofo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 60, 60));
+        jPanel2.add(imgFilosofo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 60, 60));
+        jPanel2.add(imgFilosofo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 60, 60));
+        jPanel2.add(imgFilosofo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 760, 370));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 450, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,26 +127,69 @@ public class UIFilosofos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void actualizarUI() {
-        pensarFilosofo1();
-        pensarFilosofo2();
-        pensarFilosofo3();
-        pensarFilosofo4();
-        pensarFilosofo5();
+        pensarFilosofo(0);
+        pensarFilosofo(1);
+        pensarFilosofo(2);
+        pensarFilosofo(3);
+        pensarFilosofo(4);
+        for (int i = 0; i < 5; i++) {
+            if (objMesa.isFilosofoComiendo(i)) {
+                comerFilosofo(i);
+            } 
+        }
+    }
 
-        if (objMesa.isFilosofoComiendo(0)) {
-            comerFilosofo1();
+    private void comerFilosofo(int filosofoId) {
+        getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
+        ocuparTenedor(filosofoId);
+    }
+
+    private void pensarFilosofo(int filosofoId) {
+        getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
+        liberarTenedor(filosofoId);
+    }
+
+    private JLabel getImagenFilosofo(int filosofoId) {
+        switch (filosofoId) {
+            case 0:
+                return imgFilosofo1;
+            case 1:
+                return imgFilosofo2;
+            case 2:
+                return imgFilosofo3;
+            case 3:
+                return imgFilosofo4;
+            case 4:
+                return imgFilosofo5;
+            default:
+                return null;
         }
-        if (objMesa.isFilosofoComiendo(1)) {
-            comerFilosofo2();
-        }
-        if (objMesa.isFilosofoComiendo(2)) {
-            comerFilosofo3();
-        }
-        if (objMesa.isFilosofoComiendo(3)) {
-            comerFilosofo4();
-        }
-        if (objMesa.isFilosofoComiendo(4)) {
-            comerFilosofo5();
+    }
+
+    private void ocuparTenedor(int tenedorId) {
+        getTenedor(tenedorId).setBackground(new Color(255, 0, 0));
+        getTenedor((tenedorId + 1) % 5).setBackground(new Color(255, 0, 0));
+    }
+
+    private void liberarTenedor(int tenedorId) {
+        getTenedor(tenedorId).setBackground(new Color(240, 240, 240));
+        getTenedor((tenedorId + 1) % 5).setBackground(new Color(240, 240, 240));
+    }
+
+    private JPanel getTenedor(int tenedorId) {
+        switch (tenedorId) {
+            case 0:
+                return tenedor1;
+            case 1:
+                return tenedor2;
+            case 2:
+                return tenedor3;
+            case 3:
+                return tenedor4;
+            case 4:
+                return tenedor5;
+            default:
+                return null;
         }
     }
 
@@ -168,107 +218,6 @@ public class UIFilosofos extends javax.swing.JFrame {
             }
         });
     }
-
-    public void comerFilosofo1() {
-        imgFilosofo1.setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
-        ocuparTenedor1();
-        ocuparTenedor2();
-    }
-
-    public void pensarFilosofo1() {
-        imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
-        liberarTenedor1();
-        liberarTenedor2();
-    }
-
-    public void comerFilosofo2() {
-        imgFilosofo2.setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
-        ocuparTenedor2();
-        ocuparTenedor3();
-    }
-
-    public void pensarFilosofo2() {
-        imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
-        liberarTenedor2();
-        liberarTenedor3();
-    }
-
-    public void comerFilosofo3() {
-        imgFilosofo3.setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
-        ocuparTenedor3();
-        ocuparTenedor4();
-    }
-
-    public void pensarFilosofo3() {
-        imgFilosofo3.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
-        liberarTenedor3();
-        liberarTenedor4();
-    }
-
-    public void comerFilosofo4() {
-        imgFilosofo4.setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
-        ocuparTenedor4();
-        ocuparTenedor5();
-    }
-
-    public void pensarFilosofo4() {
-        imgFilosofo4.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
-        liberarTenedor4();
-        liberarTenedor5();
-    }
-
-    public void comerFilosofo5() {
-        imgFilosofo5.setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
-        ocuparTenedor5();
-        ocuparTenedor1();
-    }
-
-    public void pensarFilosofo5() {
-        imgFilosofo5.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
-        liberarTenedor5();
-        liberarTenedor1();
-    }
-
-    private void ocuparTenedor1() {
-        tenedor1.setBackground(new Color(255, 0, 0));
-    }
-
-    private void liberarTenedor1() {
-        tenedor1.setBackground(new Color(240, 240, 240));
-    }
-
-    private void ocuparTenedor2() {
-        tenedor2.setBackground(new Color(255, 0, 0));
-    }
-
-    private void liberarTenedor2() {
-        tenedor2.setBackground(new Color(240, 240, 240));
-    }
-
-    private void ocuparTenedor3() {
-        tenedor3.setBackground(new Color(255, 0, 0));
-    }
-
-    private void liberarTenedor3() {
-        tenedor3.setBackground(new Color(240, 240, 240));
-    }
-
-    private void ocuparTenedor4() {
-        tenedor4.setBackground(new Color(255, 0, 0));
-    }
-
-    private void liberarTenedor4() {
-        tenedor4.setBackground(new Color(240, 240, 240));
-    }
-
-    private void ocuparTenedor5() {
-        tenedor5.setBackground(new Color(255, 0, 0));
-    }
-
-    private void liberarTenedor5() {
-        tenedor5.setBackground(new Color(240, 240, 240));
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imgFilosofo1;
