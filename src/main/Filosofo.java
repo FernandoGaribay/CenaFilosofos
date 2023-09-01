@@ -28,12 +28,12 @@ public class Filosofo implements Runnable {
             while (true) {
                 this.pensar();
                 
-                System.out.println("El filosofo " + id + " quiere comer.");
+                mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.ESPERANDO);
                 monitor.tomarTenedores(id);
-                mesa.setFilosofoComiendo(id, (id + 1) % 5, true);
+                mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.COMIENDO);
 
                 this.comer();
-                mesa.setFilosofoComiendo(id, (id + 1) % 5, false);
+                mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.PENSANDO);
                 monitor.liberarTenedores(id);
             }
         } catch (InterruptedException e) {

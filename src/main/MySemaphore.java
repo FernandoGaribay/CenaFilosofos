@@ -5,7 +5,7 @@ class MySemaphore {
 
     public MySemaphore(int initialPermits) {
         if (initialPermits < 0) {
-            throw new IllegalArgumentException("Initial permits must be non-negative.");
+            throw new IllegalArgumentException("Los permisos no deben ser negativos");
         }
         permits = initialPermits;
     }

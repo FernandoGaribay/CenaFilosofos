@@ -3,19 +3,19 @@ package main;
 public class Mesa {
 
     public UIFilosofos objUI;
-    public boolean[] filosofosComiendo;
-    public boolean[] tenedoresUsando;
+    public Estados[] filosofosComiendo;
+    public Estados[] tenedoresUsando;
 
     public Mesa(UIFilosofos objUI) {
         this.objUI = objUI;
     }
 
     public void iniciar() {
-        filosofosComiendo = new boolean[5];
-        tenedoresUsando = new boolean[5];
+        filosofosComiendo = new Estados[5];
+        tenedoresUsando = new Estados[5];
         for (int i = 0; i < 5; i++) {
-            filosofosComiendo[i] = false;
-            tenedoresUsando[i] = false;
+            filosofosComiendo[i] = Estados.PENSANDO;
+            tenedoresUsando[i] = Estados.ESPERANDO;
         }
         MonitorTenedores monitor = new MonitorTenedores();
 
@@ -25,18 +25,18 @@ public class Mesa {
         }
     }
 
-    public void setFilosofoComiendo(int id1, int id2, boolean valor) {
+    public void setFilosofoComiendo(int id1, int id2, Estados valor) {
         filosofosComiendo[id1] = valor;
         tenedoresUsando[id1] = valor;
         tenedoresUsando[id2] = valor;
         objUI.actualizarUI();
     }
 
-    public boolean isFilosofoComiendo(int filosofoId) {
+    public Estados isFilosofoComiendo(int filosofoId) {
         return filosofosComiendo[filosofoId];
     }
 
-    public boolean isTenedorUsando(int tenedorId) {
+    public Estados isTenedorUsando(int tenedorId) {
         return tenedoresUsando[tenedorId];
     }
 }

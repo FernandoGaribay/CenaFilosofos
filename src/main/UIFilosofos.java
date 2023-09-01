@@ -4,24 +4,27 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import static main.Estados.COMIENDO;
+import static main.Estados.ESPERANDO;
+import static main.Estados.PENSANDO;
 
 public class UIFilosofos extends javax.swing.JFrame {
 
     private final ImageHandler objImagen;
     private final Mesa objMesa;
-    private static boolean[] tenedores;
-    private static boolean[] filosofos;
+    private static Estados[] tenedores;
+    private static Estados[] filosofos;
 
     public UIFilosofos() {
         initComponents();
         objMesa = new Mesa(this);
         objImagen = new ImageHandler("/imagenes/");
-        tenedores = new boolean[5];
-        filosofos = new boolean[5];
+        tenedores = new Estados[5];
+        filosofos = new Estados[5];
 
         for (int i = 0; i < 5; i++) {
-            tenedores[i] = false;
-            filosofos[i] = false;
+            tenedores[i] = Estados.PENSANDO;
+            filosofos[i] = Estados.PENSANDO;
         }
 
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
@@ -160,28 +163,37 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     public void actualizarUI() {
         for (int i = 0; i < 5; i++) {
-            if (objMesa.isFilosofoComiendo(i)) {
-                filosofos[i] = true;
-            } else {
-                filosofos[i] = false;
+            Estados filosofo = objMesa.isFilosofoComiendo(i);
+            Estados tenedor = objMesa.isTenedorUsando(i);
+
+            switch (filosofo) {
+                case PENSANDO ->
+                    filosofos[i] = Estados.PENSANDO;
+                case ESPERANDO ->
+                    filosofos[i] = Estados.ESPERANDO;
+                case COMIENDO ->
+                    filosofos[i] = Estados.COMIENDO;
             }
 
-            if (objMesa.isTenedorUsando(i)) {
-                tenedores[i] = true;
-            } else {
-                tenedores[i] = false;
+            switch (tenedor) {
+                case PENSANDO ->
+                    tenedores[i] = Estados.PENSANDO;
+                case COMIENDO ->
+                    tenedores[i] = Estados.COMIENDO;
             }
         }
 
         for (int i = 0; i < 5; i++) {
-            if (tenedores[i]) {
+            if (tenedores[i] == Estados.COMIENDO) {
                 ocuparTenedor(i);
-            } else {
+            } else if (tenedores[i] == Estados.PENSANDO) {
                 liberarTenedor(i);
             }
 
-            if (filosofos[i]) {
+            if (filosofos[i] == Estados.COMIENDO) {
                 comerFilosofo(i);
+            } else if (filosofos[i] == Estados.ESPERANDO) {
+                esperarFilosofo(i);
             } else {
                 pensarFilosofo(i);
             }
@@ -190,6 +202,10 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     private void comerFilosofo(int filosofoId) {
         getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
+    }
+
+    private void esperarFilosofo(int filosofoId) {
+        getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("esperando.png", new Dimension(60, 60)));
     }
 
     private void pensarFilosofo(int filosofoId) {
