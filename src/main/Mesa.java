@@ -2,12 +2,14 @@ package main;
 
 public class Mesa {
 
-    public UIFilosofos objUI;
-    public Estados[] filosofosComiendo;
-    public Estados[] tenedoresUsando;
+    private UIFilosofos objUI;
+    private Estados[] filosofosComiendo;
+    private Estados[] tenedoresUsando;
+    private String ultimoMensaje;
 
     public Mesa(UIFilosofos objUI) {
         this.objUI = objUI;
+        this.ultimoMensaje = null;
     }
 
     public void iniciar() {
@@ -31,7 +33,7 @@ public class Mesa {
         tenedoresUsando[id2] = valor;
         objUI.actualizarUI();
     }
-
+   
     public Estados isFilosofoComiendo(int filosofoId) {
         return filosofosComiendo[filosofoId];
     }
@@ -39,4 +41,13 @@ public class Mesa {
     public Estados isTenedorUsando(int tenedorId) {
         return tenedoresUsando[tenedorId];
     }
+
+    public String getUltimoMensaje() {
+        return ultimoMensaje;
+    }
+
+    public void setUltimoMensaje(String ultimoMensaje) {
+        this.ultimoMensaje = ultimoMensaje;
+    }
+    
 }

@@ -5,7 +5,6 @@ public class Filosofo implements Runnable {
     private final int id;
     private static MonitorTenedores monitor;
     private final Mesa mesa;
-    private String ultimoMensaje;
 
     public Filosofo(int id, MonitorTenedores monitor, Mesa mesa) {
         this.id = id;
@@ -14,20 +13,24 @@ public class Filosofo implements Runnable {
     }
 
     public void pensar() throws InterruptedException {
-        System.out.println("Filósofo " + id + " pensando.");
+        mesa.setUltimoMensaje("Filósofo " + id + ": Pensando.");
         Thread.sleep(random(10, 3) * 1000);
     }
 
     public void comer() throws InterruptedException {
-        System.out.println("Filósofo " + id + " tiene ambos tenedores y está comiendo.");
+        mesa.setUltimoMensaje("Filósofo " + id + ": Comiendo.");
         Thread.sleep(random(5, 1) * 1000);
+    }
+
+    public void esperar() {
+        mesa.setUltimoMensaje("Filósofo " + id + ": Esperando.");
     }
 
     public void run() {
         try {
             while (true) {
                 this.pensar();
-                
+                this.esperar();
                 mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.ESPERANDO);
                 monitor.tomarTenedores(id);
                 mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.COMIENDO);
