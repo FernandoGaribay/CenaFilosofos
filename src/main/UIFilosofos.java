@@ -60,7 +60,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tenedor1.setBackground(new java.awt.Color(240, 240, 240));
@@ -118,7 +118,7 @@ public class UIFilosofos extends javax.swing.JFrame {
         jPanel2.add(imgFilosofo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 60, 60));
         jPanel2.add(imgFilosofo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 450, 390));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 450, 390));
 
         jButton1.setText("Iniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

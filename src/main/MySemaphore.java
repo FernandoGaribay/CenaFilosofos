@@ -19,6 +19,6 @@ class MySemaphore {
 
     public synchronized void release() {
         permits++;
-        notify();
+        notifyAll();
     }
 }

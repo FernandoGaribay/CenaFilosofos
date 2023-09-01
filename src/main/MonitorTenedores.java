@@ -4,12 +4,12 @@ import java.util.concurrent.Semaphore;
 
 public class MonitorTenedores {
 
-    private final Semaphore[] tenedores;
+    private final MySemaphore[] tenedores;
 
     public MonitorTenedores() {
-        tenedores = new Semaphore[5];
+        tenedores = new MySemaphore[5];
         for (int i = 0; i < 5; i++) {
-            tenedores[i] = new Semaphore(1); // Inicialmente todos los tenedores están disponibles
+            tenedores[i] = new MySemaphore(1); // Inicialmente todos los tenedores están disponibles
         }
     }
 

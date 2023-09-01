@@ -5,7 +5,7 @@ public class Mesa {
     public UIFilosofos objUI;
     public boolean[] filosofosComiendo;
     public boolean[] tenedoresUsando;
-    
+
     public Mesa(UIFilosofos objUI) {
         this.objUI = objUI;
     }
@@ -35,8 +35,8 @@ public class Mesa {
     public boolean isFilosofoComiendo(int filosofoId) {
         return filosofosComiendo[filosofoId];
     }
-    
-    public boolean isTenedorUsando(int tenedorId){
+
+    public boolean isTenedorUsando(int tenedorId) {
         return tenedoresUsando[tenedorId];
     }
 }

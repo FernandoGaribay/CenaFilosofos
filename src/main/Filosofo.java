@@ -14,12 +14,12 @@ public class Filosofo implements Runnable {
 
     public void pensar() throws InterruptedException {
         System.out.println("Filósofo " + id + " pensando.");
-        Thread.sleep(random(5,1)*1000);
+        Thread.sleep(random(10, 3) * 1000);
     }
 
     public void comer() throws InterruptedException {
         System.out.println("Filósofo " + id + " tiene ambos tenedores y está comiendo.");
-        Thread.sleep((int) (Math.random() * (5 - 2) + 2) * 1000);
+        Thread.sleep(random(5, 1) * 1000);
     }
 
     public void run() {
@@ -37,8 +37,8 @@ public class Filosofo implements Runnable {
             Thread.currentThread().interrupt();
         }
     }
-    
-    public int random(int max, int min){
-        return (int)(Math.random() * (max - min) + min);
+
+    public int random(int max, int min) {
+        return (int) (Math.random() * (max - min) + min);
     }
 }
