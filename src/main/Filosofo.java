@@ -26,6 +26,7 @@ public class Filosofo implements Runnable {
         mesa.setUltimoMensaje("Filósofo " + id + ": Esperando.");
     }
 
+    @Override
     public void run() {
         try {
             while (true) {
