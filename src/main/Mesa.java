@@ -25,10 +25,10 @@ public class Mesa {
         }
     }
 
-    public void setFilosofoComiendo(int filosofoId, int tenedor1, int tenedor2, boolean valor) {
-        filosofosComiendo[filosofoId] = valor;
-        tenedoresUsando[tenedor1] = valor;
-        tenedoresUsando[tenedor2] = valor;
+    public void setFilosofoComiendo(int id1, int id2, boolean valor) {
+        filosofosComiendo[id1] = valor;
+        tenedoresUsando[id1] = valor;
+        tenedoresUsando[id2] = valor;
         objUI.actualizarUI();
     }
 
