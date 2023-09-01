@@ -9,11 +9,20 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     private final ImageHandler objImagen;
     private final Mesa objMesa;
+    private static boolean[] tenedores;
+    private static boolean[] filosofos;
 
     public UIFilosofos() {
         initComponents();
         objMesa = new Mesa(this);
         objImagen = new ImageHandler("/imagenes/");
+        tenedores = new boolean[5];
+        filosofos = new boolean[5];
+
+        for (int i = 0; i < 5; i++) {
+            tenedores[i] = false;
+            filosofos[i] = false;
+        }
 
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
@@ -139,26 +148,41 @@ public class UIFilosofos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void actualizarUI() {
-        pensarFilosofo(0);
-        pensarFilosofo(1);
-        pensarFilosofo(2);
-        pensarFilosofo(3);
-        pensarFilosofo(4);
         for (int i = 0; i < 5; i++) {
             if (objMesa.isFilosofoComiendo(i)) {
+                filosofos[i] = true;
+            } else {
+                filosofos[i] = false;
+            }
+
+            if (objMesa.isTenedorUsando(i)) {
+                tenedores[i] = true;
+            } else {
+                tenedores[i] = false;
+            }
+        }
+
+        for (int i = 0; i < 5; i++) {
+            if (tenedores[i]) {
+                ocuparTenedor(i);
+            } else {
+                liberarTenedor(i);
+            }
+
+            if (filosofos[i]) {
                 comerFilosofo(i);
-            } 
+            } else {
+                pensarFilosofo(i);
+            }
         }
     }
 
     private void comerFilosofo(int filosofoId) {
         getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
-        ocuparTenedor(filosofoId);
     }
 
     private void pensarFilosofo(int filosofoId) {
         getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
-        liberarTenedor(filosofoId);
     }
 
     private JLabel getImagenFilosofo(int filosofoId) {
@@ -180,12 +204,10 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     private void ocuparTenedor(int tenedorId) {
         getTenedor(tenedorId).setBackground(new Color(255, 0, 0));
-        getTenedor((tenedorId + 1) % 5).setBackground(new Color(255, 0, 0));
     }
 
     private void liberarTenedor(int tenedorId) {
         getTenedor(tenedorId).setBackground(new Color(240, 240, 240));
-        getTenedor((tenedorId + 1) % 5).setBackground(new Color(240, 240, 240));
     }
 
     private JPanel getTenedor(int tenedorId) {

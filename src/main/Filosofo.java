@@ -2,19 +2,19 @@ package main;
 
 public class Filosofo implements Runnable {
 
-    private int id;
+    private final int id;
     private static MonitorTenedores monitor;
-    private Mesa mesa;
+    private final Mesa mesa;
 
     public Filosofo(int id, MonitorTenedores monitor, Mesa mesa) {
         this.id = id;
-        this.monitor = monitor;
+        Filosofo.monitor = monitor;
         this.mesa = mesa;
     }
 
     public void pensar() throws InterruptedException {
         System.out.println("Filósofo " + id + " pensando.");
-        Thread.sleep((int) (Math.random() * (5 - 2) + 2) * 1000);
+        Thread.sleep(random(5,1)*1000);
     }
 
     public void comer() throws InterruptedException {
@@ -27,14 +27,18 @@ public class Filosofo implements Runnable {
             while (true) {
                 this.pensar();
                 monitor.tomarTenedores(id);
-                mesa.setFilosofoComiendo(id, true);
+                mesa.setFilosofoComiendo(id, id, (id + 1) % 5, true);
 
                 this.comer();
-                mesa.setFilosofoComiendo(id, false);
+                mesa.setFilosofoComiendo(id, id, (id + 1) % 5, false);
                 monitor.liberarTenedores(id);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+    
+    public int random(int max, int min){
+        return (int)(Math.random() * (max - min) + min);
     }
 }
