@@ -252,36 +252,14 @@ public class UIFilosofos extends javax.swing.JFrame {
     public void actualizarUI() {
         for (int i = 0; i < 5; i++) {
             boolean filosofo = objMesa.isFilosofosComiendo(i);
-//            Estados tenedor = objMesa.isTenedorUsando(i);
 
             filosofos[i] = filosofo;
 
-//            switch (filosofo) {
-//                case PENSANDO ->
-//                    filosofos[i] = Estados.PENSANDO;
-//                case ESPERANDO ->
-//                    filosofos[i] = Estados.ESPERANDO;
-//                case COMIENDO ->
-//                    filosofos[i] = Estados.COMIENDO;
-//            }
-//            switch (tenedor) {
-//                case PENSANDO ->
-//                    tenedores[i] = Estados.PENSANDO;
-//                case COMIENDO ->
-//                    tenedores[i] = Estados.COMIENDO;
-//            }
         }
 
         for (int i = 0; i < 5; i++) {
-//            if (tenedores[i] == Estados.COMIENDO) {
-//                ocuparTenedor(i);
-//            } else if (tenedores[i] == Estados.PENSANDO) {
-//                liberarTenedor(i);
-//            }
-//
             if (filosofos[i]) {
                 comerFilosofo(i);
-                System.out.println("dasdasdadadas");
             } else {
                 pensarFilosofo(i);
             }

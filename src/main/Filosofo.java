@@ -18,12 +18,17 @@ public class Filosofo extends Thread {
     public void run() {
         while (true) {
             pensando();
-            mesa.setFilosofosComiendo(filosofo, false);
+            
+            
             mesa.ocuparTenedores(filosofo);
+            mesa.setFilosofosComiendo(filosofo, true);
             
             comiendo();
-            mesa.setFilosofosComiendo(filosofo, true);
+            
+            
             mesa.dejarTenedores(filosofo);
+            mesa.setFilosofosComiendo(filosofo, false);
+            
         }
     }
 
