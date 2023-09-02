@@ -1,9 +1,9 @@
 package main;
 
-class MySemaphore {
+class Semaforo {
     private int permits;
 
-    public MySemaphore(int initialPermits) {
+    public Semaforo(int initialPermits) {
         if (initialPermits < 0) {
             throw new IllegalArgumentException("Los permisos no deben ser negativos");
         }

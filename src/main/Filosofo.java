@@ -1,47 +1,47 @@
 package main;
 
-public class Filosofo implements Runnable {
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-    private final int id;
-    private static MonitorTenedores monitor;
-    private final Mesa mesa;
+public class Filosofo extends Thread {
 
-    public Filosofo(int id, MonitorTenedores monitor, Mesa mesa) {
-        this.id = id;
-        Filosofo.monitor = monitor;
-        this.mesa = mesa;
-    }
+    private static Mesa mesa;
+    private int filosofo;
 
-    public void pensar() throws InterruptedException {
-        mesa.setUltimoMensaje("Filósofo " + id + ": Pensando.");
-        Thread.sleep(random(10, 3) * 1000);
-    }
-
-    public void comer() throws InterruptedException {
-        mesa.setUltimoMensaje("Filósofo " + id + ": Comiendo.");
-        Thread.sleep(random(5, 1) * 1000);
-    }
-
-    public void esperar() {
-        mesa.setUltimoMensaje("Filósofo " + id + ": Esperando.");
+    public Filosofo(Mesa mesa, int filosofo) {
+        Filosofo.mesa = mesa;
+        this.filosofo = filosofo;
     }
 
     @Override
     public void run() {
-        try {
-            while (true) {
-                this.pensar();
-                this.esperar();
-                mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.ESPERANDO);
-                monitor.tomarTenedores(id);
-                mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.COMIENDO);
+        while (true) {
+            pensando();
+            mesa.setFilosofosComiendo(filosofo, false);
+            mesa.ocuparTenedores(filosofo);
+            
+            comiendo();
+            mesa.setFilosofosComiendo(filosofo, true);
+            mesa.dejarTenedores(filosofo);
+        }
+    }
 
-                this.comer();
-                mesa.setFilosofoComiendo(id, (id + 1) % 5, Estados.PENSANDO);
-                monitor.liberarTenedores(id);
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+    public void pensando() {
+        System.out.println("El filosofo " + filosofo + " esta pensando");
+        try {
+            sleep(random(5, 1) * 1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void comiendo() {
+        System.out.println("El filosofo " + filosofo + " esta comiendo");
+        try {
+            sleep(random(5, 1) * 1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

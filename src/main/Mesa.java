@@ -1,53 +1,74 @@
 package main;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Mesa {
 
-    private UIFilosofos objUI;
-    private Estados[] filosofosComiendo;
-    private Estados[] tenedoresUsando;
-    private String ultimoMensaje;
+    private boolean[] tenedores;
+    private UIFilosofos ui;
+    private boolean filosofos[];
 
-    public Mesa(UIFilosofos objUI) {
-        this.objUI = objUI;
-        this.ultimoMensaje = null;
+    public Mesa() {
+        tenedores = new boolean[5];
+    }
+
+    public Mesa(UIFilosofos ui) {
+        tenedores = new boolean[5];
+        this.ui = ui;
+        this.filosofos = new boolean[5];
+
+        for (int i = 0; i < 5; i++) {
+            filosofos[i] = false;
+        }
     }
 
     public void iniciar() {
-        filosofosComiendo = new Estados[5];
-        tenedoresUsando = new Estados[5];
         for (int i = 0; i < 5; i++) {
-            filosofosComiendo[i] = Estados.PENSANDO;
-            tenedoresUsando[i] = Estados.ESPERANDO;
-        }
-        MonitorTenedores monitor = new MonitorTenedores();
-
-        for (int i = 0; i < 5; i++) {
-            Thread filosofoThread = new Thread(new Filosofo(i, monitor, this));
-            filosofoThread.start();
+            Filosofo filosofo = new Filosofo(this, i);
+            filosofo.start();
         }
     }
 
-    public void setFilosofoComiendo(int id1, int id2, Estados valor) {
-        filosofosComiendo[id1] = valor;
-        tenedoresUsando[id1] = valor;
-        tenedoresUsando[id2] = valor;
-        objUI.actualizarUI();
-    }
-   
-    public Estados isFilosofoComiendo(int filosofoId) {
-        return filosofosComiendo[filosofoId];
+    public int tenedorIzquierda(int tenedor) {
+        return tenedor;
     }
 
-    public Estados isTenedorUsando(int tenedorId) {
-        return tenedoresUsando[tenedorId];
+    public int tenedorDerecha(int tenedor) {
+        return (tenedor + 1) % 5;
     }
 
-    public String getUltimoMensaje() {
-        return ultimoMensaje;
+    public synchronized void ocuparTenedores(int filosofo) {
+
+        while (tenedores[tenedorIzquierda(filosofo)] || tenedores[tenedorDerecha(filosofo)]) {
+            try {
+                wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        tenedores[tenedorIzquierda(filosofo)] = true;
+        tenedores[tenedorDerecha(filosofo)] = true;
     }
 
-    public void setUltimoMensaje(String ultimoMensaje) {
-        this.ultimoMensaje = ultimoMensaje;
+    public synchronized void dejarTenedores(int filosofo) {
+        tenedores[tenedorIzquierda(filosofo)] = false;
+        tenedores[tenedorDerecha(filosofo)] = false;
+        notifyAll();
     }
-    
+
+    public void validarDatos() {
+        ui.actualizarUI();
+    }
+
+    public void setFilosofosComiendo(int filosofo, boolean valor) {
+        this.filosofos[filosofo] = valor;
+        validarDatos();
+    }
+
+    public boolean isFilosofosComiendo(int i) {
+        return filosofos[i];
+    }
+
 }

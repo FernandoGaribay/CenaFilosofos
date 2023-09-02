@@ -13,18 +13,18 @@ public class UIFilosofos extends javax.swing.JFrame {
     private final ImageHandler objImagen;
     private final Mesa objMesa;
     private static Estados[] tenedores;
-    private static Estados[] filosofos;
+    private static boolean[] filosofos;
 
     public UIFilosofos() {
         initComponents();
         objMesa = new Mesa(this);
         objImagen = new ImageHandler("/imagenes/");
         tenedores = new Estados[5];
-        filosofos = new Estados[5];
+        filosofos = new boolean[5];
 
         for (int i = 0; i < 5; i++) {
             tenedores[i] = Estados.PENSANDO;
-            filosofos[i] = Estados.PENSANDO;
+            filosofos[i] = false;
         }
 
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
@@ -251,42 +251,42 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     public void actualizarUI() {
         for (int i = 0; i < 5; i++) {
-            Estados filosofo = objMesa.isFilosofoComiendo(i);
-            Estados tenedor = objMesa.isTenedorUsando(i);
+            boolean filosofo = objMesa.isFilosofosComiendo(i);
+//            Estados tenedor = objMesa.isTenedorUsando(i);
 
-            switch (filosofo) {
-                case PENSANDO ->
-                    filosofos[i] = Estados.PENSANDO;
-                case ESPERANDO ->
-                    filosofos[i] = Estados.ESPERANDO;
-                case COMIENDO ->
-                    filosofos[i] = Estados.COMIENDO;
-            }
+            filosofos[i] = filosofo;
 
-            switch (tenedor) {
-                case PENSANDO ->
-                    tenedores[i] = Estados.PENSANDO;
-                case COMIENDO ->
-                    tenedores[i] = Estados.COMIENDO;
-            }
+//            switch (filosofo) {
+//                case PENSANDO ->
+//                    filosofos[i] = Estados.PENSANDO;
+//                case ESPERANDO ->
+//                    filosofos[i] = Estados.ESPERANDO;
+//                case COMIENDO ->
+//                    filosofos[i] = Estados.COMIENDO;
+//            }
+//            switch (tenedor) {
+//                case PENSANDO ->
+//                    tenedores[i] = Estados.PENSANDO;
+//                case COMIENDO ->
+//                    tenedores[i] = Estados.COMIENDO;
+//            }
         }
 
         for (int i = 0; i < 5; i++) {
-            if (tenedores[i] == Estados.COMIENDO) {
-                ocuparTenedor(i);
-            } else if (tenedores[i] == Estados.PENSANDO) {
-                liberarTenedor(i);
-            }
-
-            if (filosofos[i] == Estados.COMIENDO) {
+//            if (tenedores[i] == Estados.COMIENDO) {
+//                ocuparTenedor(i);
+//            } else if (tenedores[i] == Estados.PENSANDO) {
+//                liberarTenedor(i);
+//            }
+//
+            if (filosofos[i]) {
                 comerFilosofo(i);
-            } else if (filosofos[i] == Estados.ESPERANDO) {
-                esperarFilosofo(i);
+                System.out.println("dasdasdadadas");
             } else {
                 pensarFilosofo(i);
             }
         }
-        this.jTextArea1.setText(jTextArea1.getText() + objMesa.getUltimoMensaje() + "\n");
+//        this.jTextArea1.setText(jTextArea1.getText() + objMesa.getUltimoMensaje() + "\n");
     }
 
     private void comerFilosofo(int filosofoId) {

@@ -5,12 +5,12 @@
 package main;
 
 class Tenedor {
-    private MySemaphore semaphore;
+    private Semaforo semaphore;
     private int id;
 
     public Tenedor(int id) {
         this.id = id;
-        this.semaphore = new MySemaphore(1);
+        this.semaphore = new Semaforo(1);
     }
 
     public void tomar() throws InterruptedException {
