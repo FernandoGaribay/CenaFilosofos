@@ -10,21 +10,32 @@ import static main.Estados.PENSANDO;
 
 public class UIFilosofos extends javax.swing.JFrame {
 
-    private final ImageHandler objImagen;
+    private ImageHandler objImagen;
     private final Mesa objMesa;
-    private boolean pausa;
+    private PanelFilosofo[] panelesFilosofos;
 
     public UIFilosofos() {
         initComponents();
+        initImagenes();
+        initPaneles();
         this.objMesa = new Mesa(this);
-        this.pausa = false;
-        this.objImagen = new ImageHandler("/imagenes/");
+    }
 
+    public void initImagenes() {
+        this.objImagen = new ImageHandler("/imagenes/");
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo3.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo4.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo5.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
+    }
+
+    public void initPaneles() {
+        panelesFilosofos = new PanelFilosofo[5];
+        for (int i = 0; i < 5; i++) {
+            panelesFilosofos[i] = new PanelFilosofo(i + 1);
+            pnlContenedorPaneles.add(panelesFilosofos[i]);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -52,46 +63,6 @@ public class UIFilosofos extends javax.swing.JFrame {
         btnPausar = new javax.swing.JButton();
         btnReanudar = new javax.swing.JButton();
         pnlContenedorPaneles = new javax.swing.JPanel();
-        pnlFilosofo1 = new javax.swing.JPanel();
-        txtFilosofo1 = new javax.swing.JLabel();
-        pnlFilosofo1Estados = new javax.swing.JPanel();
-        pnlPensandoFilosofo1 = new javax.swing.JPanel();
-        pnlEsperandoFilosofo1 = new javax.swing.JPanel();
-        pnlComiendoFilosofo1 = new javax.swing.JPanel();
-        scrollHistorialFilofoso1 = new javax.swing.JScrollPane();
-        textHistorialFilofoso1 = new javax.swing.JTextArea();
-        pnlFilosofo2 = new javax.swing.JPanel();
-        txtFilosofo2 = new javax.swing.JLabel();
-        pnlFilosofo1Estados1 = new javax.swing.JPanel();
-        pnlPensandoFilosofo2 = new javax.swing.JPanel();
-        pnlEsperandoFilosofo2 = new javax.swing.JPanel();
-        pnlComiendoFilosofo2 = new javax.swing.JPanel();
-        scrollHistorialFilofoso2 = new javax.swing.JScrollPane();
-        textHistorialFilofoso2 = new javax.swing.JTextArea();
-        pnlFilosofo3 = new javax.swing.JPanel();
-        txtFilosofo3 = new javax.swing.JLabel();
-        pnlFilosofo1Estados2 = new javax.swing.JPanel();
-        pnlPensandoFilosofo3 = new javax.swing.JPanel();
-        pnlEsperandoFilosofo3 = new javax.swing.JPanel();
-        pnlComiendoFilosofo3 = new javax.swing.JPanel();
-        scrollHistorialFilofoso3 = new javax.swing.JScrollPane();
-        textHistorialFilofoso3 = new javax.swing.JTextArea();
-        pnlFilosofo4 = new javax.swing.JPanel();
-        txtFilosofo4 = new javax.swing.JLabel();
-        pnlFilosofo1Estados3 = new javax.swing.JPanel();
-        pnlPensandoFilosofo4 = new javax.swing.JPanel();
-        pnlEsperandoFilosofo4 = new javax.swing.JPanel();
-        pnlComiendoFilosofo4 = new javax.swing.JPanel();
-        scrollHistorialFilofoso4 = new javax.swing.JScrollPane();
-        textHistorialFilofoso4 = new javax.swing.JTextArea();
-        pnlFilosofo5 = new javax.swing.JPanel();
-        txtFilosofo5 = new javax.swing.JLabel();
-        pnlFilosofo1Estados4 = new javax.swing.JPanel();
-        pnlPensandoFilosofo5 = new javax.swing.JPanel();
-        pnlEsperandoFilosofo5 = new javax.swing.JPanel();
-        pnlComiendoFilosofo5 = new javax.swing.JPanel();
-        scrollHistorialFilofoso5 = new javax.swing.JScrollPane();
-        textHistorialFilofoso5 = new javax.swing.JTextArea();
         btnIniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,347 +158,6 @@ public class UIFilosofos extends javax.swing.JFrame {
 
         pnlContenedorPaneles.setBackground(new java.awt.Color(255, 255, 255));
         pnlContenedorPaneles.setLayout(new java.awt.GridLayout(5, 0, 0, 5));
-
-        pnlFilosofo1.setBackground(new java.awt.Color(250, 250, 250));
-        pnlFilosofo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtFilosofo1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        txtFilosofo1.setText("Filosofo 1");
-        pnlFilosofo1.add(txtFilosofo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 120, -1));
-
-        pnlFilosofo1Estados.setLayout(new java.awt.GridLayout(3, 0, 0, 3));
-
-        pnlPensandoFilosofo1.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout pnlPensandoFilosofo1Layout = new javax.swing.GroupLayout(pnlPensandoFilosofo1);
-        pnlPensandoFilosofo1.setLayout(pnlPensandoFilosofo1Layout);
-        pnlPensandoFilosofo1Layout.setHorizontalGroup(
-            pnlPensandoFilosofo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlPensandoFilosofo1Layout.setVerticalGroup(
-            pnlPensandoFilosofo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados.add(pnlPensandoFilosofo1);
-
-        pnlEsperandoFilosofo1.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout pnlEsperandoFilosofo1Layout = new javax.swing.GroupLayout(pnlEsperandoFilosofo1);
-        pnlEsperandoFilosofo1.setLayout(pnlEsperandoFilosofo1Layout);
-        pnlEsperandoFilosofo1Layout.setHorizontalGroup(
-            pnlEsperandoFilosofo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlEsperandoFilosofo1Layout.setVerticalGroup(
-            pnlEsperandoFilosofo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados.add(pnlEsperandoFilosofo1);
-
-        pnlComiendoFilosofo1.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout pnlComiendoFilosofo1Layout = new javax.swing.GroupLayout(pnlComiendoFilosofo1);
-        pnlComiendoFilosofo1.setLayout(pnlComiendoFilosofo1Layout);
-        pnlComiendoFilosofo1Layout.setHorizontalGroup(
-            pnlComiendoFilosofo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlComiendoFilosofo1Layout.setVerticalGroup(
-            pnlComiendoFilosofo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados.add(pnlComiendoFilosofo1);
-
-        pnlFilosofo1.add(pnlFilosofo1Estados, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 32, -1, 55));
-
-        scrollHistorialFilofoso1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        textHistorialFilofoso1.setEditable(false);
-        textHistorialFilofoso1.setBackground(new java.awt.Color(255, 255, 255));
-        textHistorialFilofoso1.setColumns(20);
-        textHistorialFilofoso1.setRows(5);
-        scrollHistorialFilofoso1.setViewportView(textHistorialFilofoso1);
-
-        pnlFilosofo1.add(scrollHistorialFilofoso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
-
-        pnlContenedorPaneles.add(pnlFilosofo1);
-
-        pnlFilosofo2.setBackground(new java.awt.Color(250, 250, 250));
-        pnlFilosofo2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtFilosofo2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        txtFilosofo2.setText("Filosofo 2");
-        pnlFilosofo2.add(txtFilosofo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 120, -1));
-
-        pnlFilosofo1Estados1.setLayout(new java.awt.GridLayout(3, 0, 0, 3));
-
-        pnlPensandoFilosofo2.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout pnlPensandoFilosofo2Layout = new javax.swing.GroupLayout(pnlPensandoFilosofo2);
-        pnlPensandoFilosofo2.setLayout(pnlPensandoFilosofo2Layout);
-        pnlPensandoFilosofo2Layout.setHorizontalGroup(
-            pnlPensandoFilosofo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlPensandoFilosofo2Layout.setVerticalGroup(
-            pnlPensandoFilosofo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados1.add(pnlPensandoFilosofo2);
-
-        pnlEsperandoFilosofo2.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout pnlEsperandoFilosofo2Layout = new javax.swing.GroupLayout(pnlEsperandoFilosofo2);
-        pnlEsperandoFilosofo2.setLayout(pnlEsperandoFilosofo2Layout);
-        pnlEsperandoFilosofo2Layout.setHorizontalGroup(
-            pnlEsperandoFilosofo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlEsperandoFilosofo2Layout.setVerticalGroup(
-            pnlEsperandoFilosofo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados1.add(pnlEsperandoFilosofo2);
-
-        pnlComiendoFilosofo2.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout pnlComiendoFilosofo2Layout = new javax.swing.GroupLayout(pnlComiendoFilosofo2);
-        pnlComiendoFilosofo2.setLayout(pnlComiendoFilosofo2Layout);
-        pnlComiendoFilosofo2Layout.setHorizontalGroup(
-            pnlComiendoFilosofo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlComiendoFilosofo2Layout.setVerticalGroup(
-            pnlComiendoFilosofo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados1.add(pnlComiendoFilosofo2);
-
-        pnlFilosofo2.add(pnlFilosofo1Estados1, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 32, -1, 55));
-
-        scrollHistorialFilofoso2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        textHistorialFilofoso2.setEditable(false);
-        textHistorialFilofoso2.setBackground(new java.awt.Color(255, 255, 255));
-        textHistorialFilofoso2.setColumns(20);
-        textHistorialFilofoso2.setRows(5);
-        scrollHistorialFilofoso2.setViewportView(textHistorialFilofoso2);
-
-        pnlFilosofo2.add(scrollHistorialFilofoso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
-
-        pnlContenedorPaneles.add(pnlFilosofo2);
-
-        pnlFilosofo3.setBackground(new java.awt.Color(250, 250, 250));
-        pnlFilosofo3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtFilosofo3.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        txtFilosofo3.setText("Filosofo 3");
-        pnlFilosofo3.add(txtFilosofo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 120, -1));
-
-        pnlFilosofo1Estados2.setLayout(new java.awt.GridLayout(3, 0, 0, 3));
-
-        pnlPensandoFilosofo3.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout pnlPensandoFilosofo3Layout = new javax.swing.GroupLayout(pnlPensandoFilosofo3);
-        pnlPensandoFilosofo3.setLayout(pnlPensandoFilosofo3Layout);
-        pnlPensandoFilosofo3Layout.setHorizontalGroup(
-            pnlPensandoFilosofo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlPensandoFilosofo3Layout.setVerticalGroup(
-            pnlPensandoFilosofo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados2.add(pnlPensandoFilosofo3);
-
-        pnlEsperandoFilosofo3.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout pnlEsperandoFilosofo3Layout = new javax.swing.GroupLayout(pnlEsperandoFilosofo3);
-        pnlEsperandoFilosofo3.setLayout(pnlEsperandoFilosofo3Layout);
-        pnlEsperandoFilosofo3Layout.setHorizontalGroup(
-            pnlEsperandoFilosofo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlEsperandoFilosofo3Layout.setVerticalGroup(
-            pnlEsperandoFilosofo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados2.add(pnlEsperandoFilosofo3);
-
-        pnlComiendoFilosofo3.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout pnlComiendoFilosofo3Layout = new javax.swing.GroupLayout(pnlComiendoFilosofo3);
-        pnlComiendoFilosofo3.setLayout(pnlComiendoFilosofo3Layout);
-        pnlComiendoFilosofo3Layout.setHorizontalGroup(
-            pnlComiendoFilosofo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlComiendoFilosofo3Layout.setVerticalGroup(
-            pnlComiendoFilosofo3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados2.add(pnlComiendoFilosofo3);
-
-        pnlFilosofo3.add(pnlFilosofo1Estados2, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 32, -1, 55));
-
-        scrollHistorialFilofoso3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        textHistorialFilofoso3.setEditable(false);
-        textHistorialFilofoso3.setBackground(new java.awt.Color(255, 255, 255));
-        textHistorialFilofoso3.setColumns(20);
-        textHistorialFilofoso3.setRows(5);
-        scrollHistorialFilofoso3.setViewportView(textHistorialFilofoso3);
-
-        pnlFilosofo3.add(scrollHistorialFilofoso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
-
-        pnlContenedorPaneles.add(pnlFilosofo3);
-
-        pnlFilosofo4.setBackground(new java.awt.Color(250, 250, 250));
-        pnlFilosofo4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtFilosofo4.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        txtFilosofo4.setText("Filosofo 4");
-        pnlFilosofo4.add(txtFilosofo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 120, -1));
-
-        pnlFilosofo1Estados3.setLayout(new java.awt.GridLayout(3, 0, 0, 3));
-
-        pnlPensandoFilosofo4.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout pnlPensandoFilosofo4Layout = new javax.swing.GroupLayout(pnlPensandoFilosofo4);
-        pnlPensandoFilosofo4.setLayout(pnlPensandoFilosofo4Layout);
-        pnlPensandoFilosofo4Layout.setHorizontalGroup(
-            pnlPensandoFilosofo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlPensandoFilosofo4Layout.setVerticalGroup(
-            pnlPensandoFilosofo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados3.add(pnlPensandoFilosofo4);
-
-        pnlEsperandoFilosofo4.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout pnlEsperandoFilosofo4Layout = new javax.swing.GroupLayout(pnlEsperandoFilosofo4);
-        pnlEsperandoFilosofo4.setLayout(pnlEsperandoFilosofo4Layout);
-        pnlEsperandoFilosofo4Layout.setHorizontalGroup(
-            pnlEsperandoFilosofo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlEsperandoFilosofo4Layout.setVerticalGroup(
-            pnlEsperandoFilosofo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados3.add(pnlEsperandoFilosofo4);
-
-        pnlComiendoFilosofo4.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout pnlComiendoFilosofo4Layout = new javax.swing.GroupLayout(pnlComiendoFilosofo4);
-        pnlComiendoFilosofo4.setLayout(pnlComiendoFilosofo4Layout);
-        pnlComiendoFilosofo4Layout.setHorizontalGroup(
-            pnlComiendoFilosofo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlComiendoFilosofo4Layout.setVerticalGroup(
-            pnlComiendoFilosofo4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados3.add(pnlComiendoFilosofo4);
-
-        pnlFilosofo4.add(pnlFilosofo1Estados3, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 32, -1, 55));
-
-        scrollHistorialFilofoso4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        textHistorialFilofoso4.setEditable(false);
-        textHistorialFilofoso4.setBackground(new java.awt.Color(255, 255, 255));
-        textHistorialFilofoso4.setColumns(20);
-        textHistorialFilofoso4.setRows(5);
-        scrollHistorialFilofoso4.setViewportView(textHistorialFilofoso4);
-
-        pnlFilosofo4.add(scrollHistorialFilofoso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
-
-        pnlContenedorPaneles.add(pnlFilosofo4);
-
-        pnlFilosofo5.setBackground(new java.awt.Color(250, 250, 250));
-        pnlFilosofo5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtFilosofo5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        txtFilosofo5.setText("Filosofo 5");
-        pnlFilosofo5.add(txtFilosofo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 120, -1));
-
-        pnlFilosofo1Estados4.setLayout(new java.awt.GridLayout(3, 0, 0, 3));
-
-        pnlPensandoFilosofo5.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout pnlPensandoFilosofo5Layout = new javax.swing.GroupLayout(pnlPensandoFilosofo5);
-        pnlPensandoFilosofo5.setLayout(pnlPensandoFilosofo5Layout);
-        pnlPensandoFilosofo5Layout.setHorizontalGroup(
-            pnlPensandoFilosofo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlPensandoFilosofo5Layout.setVerticalGroup(
-            pnlPensandoFilosofo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados4.add(pnlPensandoFilosofo5);
-
-        pnlEsperandoFilosofo5.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout pnlEsperandoFilosofo5Layout = new javax.swing.GroupLayout(pnlEsperandoFilosofo5);
-        pnlEsperandoFilosofo5.setLayout(pnlEsperandoFilosofo5Layout);
-        pnlEsperandoFilosofo5Layout.setHorizontalGroup(
-            pnlEsperandoFilosofo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlEsperandoFilosofo5Layout.setVerticalGroup(
-            pnlEsperandoFilosofo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados4.add(pnlEsperandoFilosofo5);
-
-        pnlComiendoFilosofo5.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout pnlComiendoFilosofo5Layout = new javax.swing.GroupLayout(pnlComiendoFilosofo5);
-        pnlComiendoFilosofo5.setLayout(pnlComiendoFilosofo5Layout);
-        pnlComiendoFilosofo5Layout.setHorizontalGroup(
-            pnlComiendoFilosofo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlComiendoFilosofo5Layout.setVerticalGroup(
-            pnlComiendoFilosofo5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        pnlFilosofo1Estados4.add(pnlComiendoFilosofo5);
-
-        pnlFilosofo5.add(pnlFilosofo1Estados4, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 32, -1, 55));
-
-        scrollHistorialFilofoso5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        textHistorialFilofoso5.setEditable(false);
-        textHistorialFilofoso5.setBackground(new java.awt.Color(255, 255, 255));
-        textHistorialFilofoso5.setColumns(20);
-        textHistorialFilofoso5.setRows(5);
-        scrollHistorialFilofoso5.setViewportView(textHistorialFilofoso5);
-
-        pnlFilosofo5.add(scrollHistorialFilofoso5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
-
-        pnlContenedorPaneles.add(pnlFilosofo5);
-
         background.add(pnlContenedorPaneles, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 300, 500));
 
         btnIniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -555,34 +185,38 @@ public class UIFilosofos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-        objMesa.iniciar();
-        btnReiniciar.setEnabled(false);
+
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
     private void btnPausarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPausarActionPerformed
-        this.pausa = true;
         objMesa.pausarFilosofos(true);
     }//GEN-LAST:event_btnPausarActionPerformed
 
     private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReanudarActionPerformed
-        this.pausa = false;
         objMesa.pausarFilosofos(false);
     }//GEN-LAST:event_btnReanudarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        // TODO add your handling code here:
+        objMesa.iniciar();
+        btnIniciar.setEnabled(false);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     public void actualizarUI(Estados[] filosofos, Estados[] tenedores) {
         for (int i = 0; i < 5; i++) {
 
             switch (filosofos[i]) {
-                case COMIENDO ->
+                case COMIENDO:
                     comerFilosofo(i);
-                case ESPERANDO ->
+                    panelesFilosofos[i].comer();
+                    break;
+                case ESPERANDO:
                     esperarFilosofo(i);
-                case PENSANDO ->
+                    panelesFilosofos[i].esperar();
+                    break;
+                case PENSANDO:
                     pensarFilosofo(i);
+                    panelesFilosofos[i].pensar();
+                    break;
             }
 
             if (tenedores[i] == Estados.OCUPADO) {
@@ -649,31 +283,6 @@ public class UIFilosofos extends javax.swing.JFrame {
         }
     }// </editor-fold> 
 
-    // <editor-fold defaultstate="collapsed" desc="-- Colores estados --">  
-    public Color Frojo() {
-        return new Color(255, 0, 0);
-    }
-
-    public Color Brojo() {
-        return new Color(255, 204, 204);
-    }
-
-    public Color Famarillo() {
-        return new Color(255, 255, 0);
-    }
-
-    public Color Bamarillo() {
-        return new Color(255, 255, 204);
-    }
-
-    public Color Fverde() {
-        return new Color(0, 255, 0);
-    }
-
-    public Color Bverde() {
-        return new Color(204, 255, 204);
-    }// </editor-fold> 
-
     public static void main(String args[]) {
 
         try {
@@ -716,52 +325,12 @@ public class UIFilosofos extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenedor3;
     private javax.swing.JLabel lblTenedor4;
     private javax.swing.JLabel lblTenedor5;
-    private javax.swing.JPanel pnlComiendoFilosofo1;
-    private javax.swing.JPanel pnlComiendoFilosofo2;
-    private javax.swing.JPanel pnlComiendoFilosofo3;
-    private javax.swing.JPanel pnlComiendoFilosofo4;
-    private javax.swing.JPanel pnlComiendoFilosofo5;
     private javax.swing.JPanel pnlContenedorGrafico;
     private javax.swing.JPanel pnlContenedorPaneles;
-    private javax.swing.JPanel pnlEsperandoFilosofo1;
-    private javax.swing.JPanel pnlEsperandoFilosofo2;
-    private javax.swing.JPanel pnlEsperandoFilosofo3;
-    private javax.swing.JPanel pnlEsperandoFilosofo4;
-    private javax.swing.JPanel pnlEsperandoFilosofo5;
-    private javax.swing.JPanel pnlFilosofo1;
-    private javax.swing.JPanel pnlFilosofo1Estados;
-    private javax.swing.JPanel pnlFilosofo1Estados1;
-    private javax.swing.JPanel pnlFilosofo1Estados2;
-    private javax.swing.JPanel pnlFilosofo1Estados3;
-    private javax.swing.JPanel pnlFilosofo1Estados4;
-    private javax.swing.JPanel pnlFilosofo2;
-    private javax.swing.JPanel pnlFilosofo3;
-    private javax.swing.JPanel pnlFilosofo4;
-    private javax.swing.JPanel pnlFilosofo5;
-    private javax.swing.JPanel pnlPensandoFilosofo1;
-    private javax.swing.JPanel pnlPensandoFilosofo2;
-    private javax.swing.JPanel pnlPensandoFilosofo3;
-    private javax.swing.JPanel pnlPensandoFilosofo4;
-    private javax.swing.JPanel pnlPensandoFilosofo5;
-    private javax.swing.JScrollPane scrollHistorialFilofoso1;
-    private javax.swing.JScrollPane scrollHistorialFilofoso2;
-    private javax.swing.JScrollPane scrollHistorialFilofoso3;
-    private javax.swing.JScrollPane scrollHistorialFilofoso4;
-    private javax.swing.JScrollPane scrollHistorialFilofoso5;
     private javax.swing.JPanel tenedor1;
     private javax.swing.JPanel tenedor2;
     private javax.swing.JPanel tenedor3;
     private javax.swing.JPanel tenedor4;
     private javax.swing.JPanel tenedor5;
-    private javax.swing.JTextArea textHistorialFilofoso1;
-    private javax.swing.JTextArea textHistorialFilofoso2;
-    private javax.swing.JTextArea textHistorialFilofoso3;
-    private javax.swing.JTextArea textHistorialFilofoso4;
-    private javax.swing.JTextArea textHistorialFilofoso5;
-    private javax.swing.JLabel txtFilosofo1;
-    private javax.swing.JLabel txtFilosofo2;
-    private javax.swing.JLabel txtFilosofo3;
-    private javax.swing.JLabel txtFilosofo4;
-    private javax.swing.JLabel txtFilosofo5;
     // End of variables declaration//GEN-END:variables
 }
