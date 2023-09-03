@@ -18,6 +18,7 @@ public class Filosofo extends Thread {
     public void run() {
         while (true) {
             pensando();
+            esperando();
             comiendo();
         }
     }
@@ -26,7 +27,7 @@ public class Filosofo extends Thread {
         mesa.dejarTenedores(filosofo);
         mesa.actualizarFilosofo(filosofo, Estados.PENSANDO);
         System.out.println("Filosofo " + filosofo + " pensando");
-        
+
         try {
             sleep(random(3, 1) * 1000);
         } catch (InterruptedException ex) {
@@ -34,11 +35,16 @@ public class Filosofo extends Thread {
         }
     }
 
+    public void esperando() {
+        mesa.actualizarFilosofo(filosofo, Estados.ESPERANDO);
+        System.out.println("Filosofo " + filosofo + " esperando");
+    }
+
     public void comiendo() {
         mesa.ocuparTenedores(filosofo);
         mesa.actualizarFilosofo(filosofo, Estados.COMIENDO);
         System.out.println("Filosofo " + filosofo + " comiendo");
-        
+
         try {
             sleep(random(6, 2) * 1000);
         } catch (InterruptedException ex) {

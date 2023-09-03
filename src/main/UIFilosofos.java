@@ -242,10 +242,11 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     public void actualizarUI(Estados[] filosofos, Estados[] tenedores) {
         for (int i = 0; i < 5; i++) {
-            if (filosofos[i] == Estados.COMIENDO) {
-                comerFilosofo(i);
-            } else if (filosofos[i] == Estados.PENSANDO){
-                pensarFilosofo(i);
+            
+            switch (filosofos[i]) {
+                case COMIENDO -> comerFilosofo(i);
+                case ESPERANDO -> esperarFilosofo(i);
+                case PENSANDO -> pensarFilosofo(i);
             }
 
             if (tenedores[i] == Estados.OCUPADO) {
@@ -253,7 +254,6 @@ public class UIFilosofos extends javax.swing.JFrame {
             } else if (tenedores[i] == Estados.LIBRE){
                 liberarTenedor(i);
             }
-            System.out.println("" + i);
         }
 //        this.jTextArea1.setText(jTextArea1.getText() + objMesa.getUltimoMensaje() + "\n");
     }
