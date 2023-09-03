@@ -1,7 +1,5 @@
 package main;
 
-import java.util.concurrent.Semaphore;
-
 public class MonitorTenedores {
 
     private final Semaforo[] tenedores;

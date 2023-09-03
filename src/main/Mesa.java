@@ -7,6 +7,7 @@ public class Mesa {
 
     private Estados[] filosofos;
     private Estados[] tenedores;
+    private MonitorTenedores monitor;
     private UIFilosofos ui;
 
     public Mesa() {
