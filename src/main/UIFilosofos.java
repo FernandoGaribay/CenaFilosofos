@@ -240,17 +240,17 @@ public class UIFilosofos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void actualizarUI(boolean[] filosofos, boolean[] tenedores) {
+    public void actualizarUI(Estados[] filosofos, Estados[] tenedores) {
         for (int i = 0; i < 5; i++) {
-            if (filosofos[i]) {
+            if (filosofos[i] == Estados.COMIENDO) {
                 comerFilosofo(i);
-            } else {
+            } else if (filosofos[i] == Estados.PENSANDO){
                 pensarFilosofo(i);
             }
 
-            if (tenedores[i]) {
+            if (tenedores[i] == Estados.OCUPADO) {
                 ocuparTenedor(i);
-            } else {
+            } else if (tenedores[i] == Estados.LIBRE){
                 liberarTenedor(i);
             }
             System.out.println("" + i);

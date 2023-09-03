@@ -5,5 +5,5 @@ public enum Estados {
     ESPERANDO,
     COMIENDO,
     OCUPADO,
-    USANDO
+    LIBRE
 }

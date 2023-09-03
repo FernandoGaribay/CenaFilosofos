@@ -24,7 +24,7 @@ public class Filosofo extends Thread {
 
     public void pensando() {
         mesa.dejarTenedores(filosofo);
-        mesa.actualizarFilosofo(filosofo, false);
+        mesa.actualizarFilosofo(filosofo, Estados.PENSANDO);
         System.out.println("Filosofo " + filosofo + " pensando");
         
         try {
@@ -36,7 +36,7 @@ public class Filosofo extends Thread {
 
     public void comiendo() {
         mesa.ocuparTenedores(filosofo);
-        mesa.actualizarFilosofo(filosofo, true);
+        mesa.actualizarFilosofo(filosofo, Estados.COMIENDO);
         System.out.println("Filosofo " + filosofo + " comiendo");
         
         try {

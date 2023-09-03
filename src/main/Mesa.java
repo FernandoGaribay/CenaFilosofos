@@ -5,22 +5,22 @@ import java.util.logging.Logger;
 
 public class Mesa {
 
-    private boolean[] tenedores;
+    private Estados[] tenedores;
     private UIFilosofos ui;
-    private boolean filosofos[];
+    private Estados[] filosofos;
 
     public Mesa() {
-        tenedores = new boolean[5];
+        tenedores = new Estados[5];
     }
 
     public Mesa(UIFilosofos ui) {
-        this.tenedores = new boolean[5];
+        this.tenedores = new Estados[5];
         this.ui = ui;
-        this.filosofos = new boolean[5];
+        this.filosofos = new Estados[5];
 
         for (int i = 0; i < 5; i++) {
-            filosofos[i] = false;
-            tenedores[i] = false;
+            filosofos[i] = Estados.PENSANDO;
+            tenedores[i] = Estados.LIBRE;
         }
     }
 
@@ -41,7 +41,7 @@ public class Mesa {
 
     public synchronized void ocuparTenedores(int filosofo) {
 
-        while (tenedores[tenedorIzquierda(filosofo)] || tenedores[tenedorDerecha(filosofo)]) {
+        while (tenedores[tenedorIzquierda(filosofo)] == Estados.OCUPADO || tenedores[tenedorDerecha(filosofo)] == Estados.OCUPADO) {
             try {
                 wait();
             } catch (InterruptedException ex) {
@@ -49,26 +49,26 @@ public class Mesa {
             }
         }
 
-        tenedores[tenedorIzquierda(filosofo)] = true;
-        tenedores[tenedorDerecha(filosofo)] = true;
+        tenedores[tenedorIzquierda(filosofo)] = Estados.OCUPADO;
+        tenedores[tenedorDerecha(filosofo)] = Estados.OCUPADO;
     }
 
     public synchronized void dejarTenedores(int filosofo) {
-        tenedores[tenedorIzquierda(filosofo)] = false;
-        tenedores[tenedorDerecha(filosofo)] = false;
+        tenedores[tenedorIzquierda(filosofo)] = Estados.LIBRE;
+        tenedores[tenedorDerecha(filosofo)] = Estados.LIBRE;
         notifyAll();
     }
 
-    public synchronized void actualizarFilosofo(int i, boolean valor) {
+    public synchronized void actualizarFilosofo(int i, Estados valor) {
         setFilosofosComiendo(i, valor);
         ui.actualizarUI(filosofos,tenedores);
     }
 
-    public void setFilosofosComiendo(int filosofo, boolean valor) {
+    public void setFilosofosComiendo(int filosofo, Estados valor) {
         this.filosofos[filosofo] = valor;
     }
 
-    public boolean isFilosofosComiendo(int i) {
+    public Estados isFilosofosComiendo(int i) {
         return filosofos[i];
     }
 }
