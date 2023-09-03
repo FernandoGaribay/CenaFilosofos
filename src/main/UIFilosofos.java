@@ -12,20 +12,11 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     private final ImageHandler objImagen;
     private final Mesa objMesa;
-    private static Estados[] tenedores;
-    private static boolean[] filosofos;
 
     public UIFilosofos() {
         initComponents();
         objMesa = new Mesa(this);
         objImagen = new ImageHandler("/imagenes/");
-        tenedores = new Estados[5];
-        filosofos = new boolean[5];
-
-        for (int i = 0; i < 5; i++) {
-            tenedores[i] = Estados.PENSANDO;
-            filosofos[i] = false;
-        }
 
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
@@ -249,20 +240,20 @@ public class UIFilosofos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void actualizarUI() {
-        for (int i = 0; i < 5; i++) {
-            boolean filosofo = objMesa.isFilosofosComiendo(i);
-
-            filosofos[i] = filosofo;
-
-        }
-
+    public void actualizarUI(boolean[] filosofos, boolean[] tenedores) {
         for (int i = 0; i < 5; i++) {
             if (filosofos[i]) {
                 comerFilosofo(i);
             } else {
                 pensarFilosofo(i);
             }
+
+            if (tenedores[i]) {
+                ocuparTenedor(i);
+            } else {
+                liberarTenedor(i);
+            }
+            System.out.println("" + i);
         }
 //        this.jTextArea1.setText(jTextArea1.getText() + objMesa.getUltimoMensaje() + "\n");
     }

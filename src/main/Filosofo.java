@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class Filosofo extends Thread {
 
     private static Mesa mesa;
-    private int filosofo;
+    private final int filosofo;
 
     public Filosofo(Mesa mesa, int filosofo) {
         Filosofo.mesa = mesa;
@@ -18,39 +18,35 @@ public class Filosofo extends Thread {
     public void run() {
         while (true) {
             pensando();
-            
-            
-            mesa.ocuparTenedores(filosofo);
-            mesa.setFilosofosComiendo(filosofo, true);
-            
             comiendo();
-            
-            
-            mesa.dejarTenedores(filosofo);
-            mesa.setFilosofosComiendo(filosofo, false);
-            
         }
     }
 
     public void pensando() {
-        System.out.println("El filosofo " + filosofo + " esta pensando");
+        mesa.dejarTenedores(filosofo);
+        mesa.actualizarFilosofo(filosofo, false);
+        System.out.println("Filosofo " + filosofo + " pensando");
+        
         try {
-            sleep(random(5, 1) * 1000);
+            sleep(random(3, 1) * 1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void comiendo() {
-        System.out.println("El filosofo " + filosofo + " esta comiendo");
+        mesa.ocuparTenedores(filosofo);
+        mesa.actualizarFilosofo(filosofo, true);
+        System.out.println("Filosofo " + filosofo + " comiendo");
+        
         try {
-            sleep(random(5, 1) * 1000);
+            sleep(random(6, 2) * 1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public int random(int max, int min) {
+    private int random(int max, int min) {
         return (int) (Math.random() * (max - min) + min);
     }
 }

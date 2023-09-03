@@ -14,12 +14,13 @@ public class Mesa {
     }
 
     public Mesa(UIFilosofos ui) {
-        tenedores = new boolean[5];
+        this.tenedores = new boolean[5];
         this.ui = ui;
         this.filosofos = new boolean[5];
 
         for (int i = 0; i < 5; i++) {
             filosofos[i] = false;
+            tenedores[i] = false;
         }
     }
 
@@ -58,17 +59,16 @@ public class Mesa {
         notifyAll();
     }
 
-    public void validarDatos() {
-        ui.actualizarUI();
+    public synchronized void actualizarFilosofo(int i, boolean valor) {
+        setFilosofosComiendo(i, valor);
+        ui.actualizarUI(filosofos,tenedores);
     }
 
     public void setFilosofosComiendo(int filosofo, boolean valor) {
         this.filosofos[filosofo] = valor;
-        validarDatos();
     }
 
     public boolean isFilosofosComiendo(int i) {
         return filosofos[i];
     }
-
 }
