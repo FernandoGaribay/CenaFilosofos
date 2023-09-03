@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 public class Mesa {
 
+    private static Filosofo[] objFilosofos;
     private Estados[] filosofos;
     private Estados[] tenedores;
     private MonitorTenedores monitor;
@@ -15,6 +16,7 @@ public class Mesa {
     }
 
     public Mesa(UIFilosofos ui) {
+        Mesa.objFilosofos = new Filosofo[5];
         this.filosofos = new Estados[5];
         this.tenedores = new Estados[5];
         this.ui = ui;
@@ -27,17 +29,9 @@ public class Mesa {
 
     public void iniciar() {
         for (int i = 0; i < 5; i++) {
-            Filosofo filosofo = new Filosofo(this, i);
-            filosofo.start();
+            objFilosofos[i] = new Filosofo(this, i);
+            objFilosofos[i].start();
         }
-    }
-
-    public int tenedorIzquierda(int tenedor) {
-        return tenedor;
-    }
-
-    public int tenedorDerecha(int tenedor) {
-        return (tenedor + 1) % 5;
     }
 
     public synchronized void ocuparTenedores(int filosofo) {
@@ -63,5 +57,19 @@ public class Mesa {
     public synchronized void actualizarFilosofo(int i, Estados valor) {
         filosofos[i] = valor;
         ui.actualizarUI(filosofos, tenedores);
+    }
+
+    public int tenedorIzquierda(int tenedor) {
+        return tenedor;
+    }
+
+    public int tenedorDerecha(int tenedor) {
+        return (tenedor + 1) % 5;
+    }
+
+    public void pausarFilosofos(boolean valor) {
+        for (int i = 0; i < 5; i++) {
+            objFilosofos[i].setPausa(valor);
+        }
     }
 }

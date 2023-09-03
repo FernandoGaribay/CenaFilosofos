@@ -12,11 +12,13 @@ public class UIFilosofos extends javax.swing.JFrame {
 
     private final ImageHandler objImagen;
     private final Mesa objMesa;
+    private boolean pausa;
 
     public UIFilosofos() {
         initComponents();
-        objMesa = new Mesa(this);
-        objImagen = new ImageHandler("/imagenes/");
+        this.objMesa = new Mesa(this);
+        this.pausa = false;
+        this.objImagen = new ImageHandler("/imagenes/");
 
         imgFilosofo1.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
         imgFilosofo2.setIcon(objImagen.redimencionarImagen("pensando.png", new Dimension(60, 60)));
@@ -50,8 +52,8 @@ public class UIFilosofos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnPausar = new javax.swing.JButton();
+        btnReanudar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtMinComer = new javax.swing.JTextField();
@@ -154,21 +156,21 @@ public class UIFilosofos extends javax.swing.JFrame {
         jLabel6.setText("Logs:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 10, 290, 30));
 
-        jButton2.setText("Pausar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnPausar.setText("Pausar");
+        btnPausar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnPausarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 110, -1));
+        jPanel1.add(btnPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 110, -1));
 
-        jButton3.setText("Reanudar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnReanudar.setText("Reanudar");
+        btnReanudar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnReanudarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 110, -1));
+        jPanel1.add(btnReanudar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 110, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Configuracion"));
@@ -228,13 +230,15 @@ public class UIFilosofos extends javax.swing.JFrame {
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnPausarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPausarActionPerformed
+        this.pausa = true;
+        objMesa.pausarFilosofos(true);
+    }//GEN-LAST:event_btnPausarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReanudarActionPerformed
+        this.pausa = false;
+        objMesa.pausarFilosofos(false);
+    }//GEN-LAST:event_btnReanudarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -340,14 +344,14 @@ public class UIFilosofos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPausar;
+    private javax.swing.JButton btnReanudar;
     private javax.swing.JLabel imgFilosofo1;
     private javax.swing.JLabel imgFilosofo2;
     private javax.swing.JLabel imgFilosofo3;
     private javax.swing.JLabel imgFilosofo4;
     private javax.swing.JLabel imgFilosofo5;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
