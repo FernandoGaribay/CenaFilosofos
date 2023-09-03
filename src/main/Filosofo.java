@@ -28,25 +28,26 @@ public class Filosofo extends Thread {
         mesa.actualizarFilosofo(filosofo, Estados.PENSANDO);
         System.out.println("Filosofo " + filosofo + " pensando");
 
-        try {
-            sleep(random(3, 1) * 1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sleep(3, 1);
     }
 
     public void esperando() {
         mesa.actualizarFilosofo(filosofo, Estados.ESPERANDO);
+        
         System.out.println("Filosofo " + filosofo + " esperando");
     }
 
     public void comiendo() {
         mesa.ocuparTenedores(filosofo);
         mesa.actualizarFilosofo(filosofo, Estados.COMIENDO);
-        System.out.println("Filosofo " + filosofo + " comiendo");
 
+        System.out.println("Filosofo " + filosofo + " comiendo");
+        sleep(6, 2);
+    }
+
+    private void sleep(int max, int min) {
         try {
-            sleep(random(6, 2) * 1000);
+            sleep(random(max, min) * 1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
         }

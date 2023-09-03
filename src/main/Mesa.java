@@ -5,22 +5,22 @@ import java.util.logging.Logger;
 
 public class Mesa {
 
+    private Estados[] filosofos;
     private Estados[] tenedores;
     private UIFilosofos ui;
-    private Estados[] filosofos;
 
     public Mesa() {
         tenedores = new Estados[5];
     }
 
     public Mesa(UIFilosofos ui) {
+        this.filosofos = new Estados[5];
         this.tenedores = new Estados[5];
         this.ui = ui;
-        this.filosofos = new Estados[5];
 
         for (int i = 0; i < 5; i++) {
-            filosofos[i] = Estados.PENSANDO;
-            tenedores[i] = Estados.LIBRE;
+            filosofos[i] = Estados.PENSANDO; // Todos los filosofos inician pensando
+            tenedores[i] = Estados.LIBRE; // Todos los tenedores inician estando libres
         }
     }
 
@@ -60,15 +60,7 @@ public class Mesa {
     }
 
     public synchronized void actualizarFilosofo(int i, Estados valor) {
-        setFilosofosComiendo(i, valor);
-        ui.actualizarUI(filosofos,tenedores);
-    }
-
-    public void setFilosofosComiendo(int filosofo, Estados valor) {
-        this.filosofos[filosofo] = valor;
-    }
-
-    public Estados isFilosofosComiendo(int i) {
-        return filosofos[i];
+        filosofos[i] = valor;
+        ui.actualizarUI(filosofos, tenedores);
     }
 }

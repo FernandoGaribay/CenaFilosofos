@@ -255,9 +255,9 @@ public class UIFilosofos extends javax.swing.JFrame {
                 liberarTenedor(i);
             }
         }
-//        this.jTextArea1.setText(jTextArea1.getText() + objMesa.getUltimoMensaje() + "\n");
     }
 
+    // <editor-fold defaultstate="collapsed" desc="-- Estados filosofos --">  
     private void comerFilosofo(int filosofoId) {
         getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));
     }
@@ -285,8 +285,9 @@ public class UIFilosofos extends javax.swing.JFrame {
             default:
                 return null;
         }
-    }
+    }// </editor-fold> 
 
+    // <editor-fold defaultstate="collapsed" desc="-- Estados tenedoes --">  
     private void ocuparTenedor(int tenedorId) {
         getTenedor(tenedorId).setBackground(new Color(255, 0, 0));
     }
@@ -310,7 +311,7 @@ public class UIFilosofos extends javax.swing.JFrame {
             default:
                 return null;
         }
-    }
+    }// </editor-fold> 
 
     public static void main(String args[]) {
 
