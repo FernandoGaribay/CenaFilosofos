@@ -4,27 +4,48 @@ import java.awt.Color;
 
 public class PanelFilosofo extends javax.swing.JPanel {
 
+    private final int idFilosofo;
+
     public PanelFilosofo(int i) {
         initComponents();
-        this.lblFilosofo.setText(this.lblFilosofo.getText() + i);
+        this.idFilosofo = i;
+        this.lblFilosofo.setText(this.lblFilosofo.getText() + this.idFilosofo);
+    }
+
+    public void historialPensar() {
+        textHistorialFilofoso.setText(textHistorialFilofoso.getText() + "Filosofo " + this.idFilosofo + ": Pensando...\n");
+    }
+
+    public void historialEsperar() {
+        textHistorialFilofoso.setText(textHistorialFilofoso.getText() + "Filosofo " + this.idFilosofo + ": Esperando...\n");
+    }
+
+    public void historialComer() {
+        textHistorialFilofoso.setText(textHistorialFilofoso.getText() + "Filosofo " + this.idFilosofo + ": Comiendo...\n");
     }
 
     public void pensar() {
         this.pnlComiendo.setBackground(Brojo());
         this.pnlEsperando.setBackground(Bamarillo());
         this.pnlPensando.setBackground(Fverde());
+
+        this.historialPensar();
     }
 
     public void esperar() {
         this.pnlComiendo.setBackground(Brojo());
         this.pnlEsperando.setBackground(Famarillo());
         this.pnlPensando.setBackground(Bverde());
+        
+        this.historialEsperar();
     }
 
     public void comer() {
         this.pnlComiendo.setBackground(Frojo());
         this.pnlEsperando.setBackground(Bamarillo());
         this.pnlPensando.setBackground(Bverde());
+        
+        this.historialComer();
     }
 
     // <editor-fold defaultstate="collapsed" desc="-- Colores estados --">  
@@ -62,8 +83,8 @@ public class PanelFilosofo extends javax.swing.JPanel {
         pnlPensando = new javax.swing.JPanel();
         pnlEsperando = new javax.swing.JPanel();
         pnlComiendo = new javax.swing.JPanel();
-        scrollHistorialFilofoso1 = new javax.swing.JScrollPane();
-        textHistorialFilofoso1 = new javax.swing.JTextArea();
+        scrollHistorialFilofoso = new javax.swing.JScrollPane();
+        textHistorialFilofoso = new javax.swing.JTextArea();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,15 +144,15 @@ public class PanelFilosofo extends javax.swing.JPanel {
 
         pnlFilosofo1.add(pnlFilosofo1Estados, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 32, -1, 55));
 
-        scrollHistorialFilofoso1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollHistorialFilofoso.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        textHistorialFilofoso1.setEditable(false);
-        textHistorialFilofoso1.setBackground(new java.awt.Color(255, 255, 255));
-        textHistorialFilofoso1.setColumns(20);
-        textHistorialFilofoso1.setRows(5);
-        scrollHistorialFilofoso1.setViewportView(textHistorialFilofoso1);
+        textHistorialFilofoso.setEditable(false);
+        textHistorialFilofoso.setBackground(new java.awt.Color(255, 255, 255));
+        textHistorialFilofoso.setColumns(20);
+        textHistorialFilofoso.setRows(5);
+        scrollHistorialFilofoso.setViewportView(textHistorialFilofoso);
 
-        pnlFilosofo1.add(scrollHistorialFilofoso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
+        pnlFilosofo1.add(scrollHistorialFilofoso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 250, 55));
 
         add(pnlFilosofo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 96));
     }// </editor-fold>//GEN-END:initComponents
@@ -144,7 +165,7 @@ public class PanelFilosofo extends javax.swing.JPanel {
     private javax.swing.JPanel pnlFilosofo1;
     private javax.swing.JPanel pnlFilosofo1Estados;
     private javax.swing.JPanel pnlPensando;
-    private javax.swing.JScrollPane scrollHistorialFilofoso1;
-    private javax.swing.JTextArea textHistorialFilofoso1;
+    private javax.swing.JScrollPane scrollHistorialFilofoso;
+    private javax.swing.JTextArea textHistorialFilofoso;
     // End of variables declaration//GEN-END:variables
 }
