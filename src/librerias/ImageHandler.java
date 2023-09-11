@@ -1,4 +1,4 @@
-package main;
+package librerias;
 
 import java.awt.Dimension;
 import java.awt.Image;

@@ -1,4 +1,4 @@
-package main;
+package logica.paneles;
 
 import java.awt.Color;
 

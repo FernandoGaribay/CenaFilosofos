@@ -1,12 +1,16 @@
 package main;
 
+import logica.paneles.PanelFilosofo;
+import logica.Estados;
+import logica.Mesa;
+import librerias.ImageHandler;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import static main.Estados.COMIENDO;
-import static main.Estados.ESPERANDO;
-import static main.Estados.PENSANDO;
+import static logica.Estados.COMIENDO;
+import static logica.Estados.ESPERANDO;
+import static logica.Estados.PENSANDO;
 
 public class UIFilosofos extends javax.swing.JFrame {
 

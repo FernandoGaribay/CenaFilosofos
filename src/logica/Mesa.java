@@ -1,19 +1,15 @@
-package main;
+package logica;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.UIFilosofos;
 
 public class Mesa {
 
     private static Filosofo[] objFilosofos;
+    private final Estados[] tenedores;
     private Estados[] filosofos;
-    private Estados[] tenedores;
-    private MonitorTenedores monitor;
     private UIFilosofos ui;
-
-    public Mesa() {
-        tenedores = new Estados[5];
-    }
 
     public Mesa(UIFilosofos ui) {
         Mesa.objFilosofos = new Filosofo[5];
@@ -36,7 +32,8 @@ public class Mesa {
 
     public synchronized void ocuparTenedores(int filosofo) {
 
-        while (tenedores[tenedorIzquierda(filosofo)] == Estados.OCUPADO || tenedores[tenedorDerecha(filosofo)] == Estados.OCUPADO) {
+        while (tenedores[tenedorIzquierda(filosofo)] == Estados.OCUPADO 
+                || tenedores[tenedorDerecha(filosofo)] == Estados.OCUPADO) {
             try {
                 wait();
             } catch (InterruptedException ex) {
@@ -54,8 +51,8 @@ public class Mesa {
         notifyAll();
     }
 
-    public synchronized void actualizarFilosofo(int i, Estados valor) {
-        filosofos[i] = valor;
+    public synchronized void actualizarFilosofo(int i, Estados estado) {
+        filosofos[i] = estado;
         ui.actualizarUI(filosofos, tenedores);
     }
 

@@ -1,4 +1,4 @@
-package main;
+package logica;
 
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;

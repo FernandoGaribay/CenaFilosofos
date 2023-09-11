@@ -1,4 +1,4 @@
-package main;
+package logica;
 
 public enum Estados {
     PENSANDO,
