@@ -1,38 +1,37 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.UIFilosofos;
 
 public class Mesa {
 
-    private static Filosofo[] objFilosofos;
-    private final Estados[] tenedores;
-    private Estados[] filosofos;
+    private List<Filosofo> filosofos;
+    private Estados[] tenedores;
     private UIFilosofos ui;
 
     public Mesa(UIFilosofos ui) {
-        Mesa.objFilosofos = new Filosofo[5];
-        this.filosofos = new Estados[5];
+        this.filosofos = new ArrayList<>(5);
         this.tenedores = new Estados[5];
         this.ui = ui;
 
         for (int i = 0; i < 5; i++) {
-            filosofos[i] = Estados.PENSANDO; // Todos los filosofos inician pensando
-            tenedores[i] = Estados.LIBRE; // Todos los tenedores inician estando libres
+            filosofos.add(new Filosofo(this, i));
+            tenedores[i] = Estados.LIBRE;
         }
     }
 
     public void iniciar() {
         for (int i = 0; i < 5; i++) {
-            objFilosofos[i] = new Filosofo(this, i);
-            objFilosofos[i].start();
+            filosofos.get(i).start();
         }
     }
 
     public synchronized void ocuparTenedores(int filosofo) {
 
-        while (tenedores[tenedorIzquierda(filosofo)] == Estados.OCUPADO 
+        while (tenedores[tenedorIzquierda(filosofo)] == Estados.OCUPADO
                 || tenedores[tenedorDerecha(filosofo)] == Estados.OCUPADO) {
             try {
                 wait();
@@ -52,7 +51,7 @@ public class Mesa {
     }
 
     public synchronized void actualizarFilosofo(int i, Estados estado) {
-        filosofos[i] = estado;
+        filosofos.get(i).setEstado(estado);
         ui.actualizarUI(filosofos, tenedores);
     }
 

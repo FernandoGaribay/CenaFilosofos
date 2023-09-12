@@ -68,6 +68,14 @@ public class Filosofo extends Thread {
         return (int) (Math.random() * (max - min) + min);
     }
 
+    public Estados getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estados estado) {
+        this.estado = estado;
+    }
+    
     public void setPausa(boolean valor) {
         this.pausa = valor;
     }
