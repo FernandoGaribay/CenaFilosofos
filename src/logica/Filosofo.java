@@ -6,15 +6,16 @@ import java.util.logging.Logger;
 
 public class Filosofo extends Thread {
 
-    private static Mesa mesa;
+    private Mesa mesa;
     private boolean pausa;
-    private final int filosofo;
+    private int filosofo;
     private Estados estado;
 
     public Filosofo(Mesa mesa, int filosofo) {
-        Filosofo.mesa = mesa;
+        this.mesa = mesa;
         this.pausa = false;
         this.filosofo = filosofo;
+        this.estado = Estados.PENSANDO;
     }
 
     @Override
@@ -25,34 +26,32 @@ public class Filosofo extends Thread {
                 esperando();
                 comiendo();
             }
-            System.out.println("PAUSA: " + pausa);
         }
     }
 
     public void pensando() {
-        estado = Estados.PENSANDO;
         mesa.dejarTenedores(filosofo);
-        mesa.actualizarFilosofo(filosofo, Estados.PENSANDO);
-        
-        System.out.println("Filosofo " + filosofo + " " + estado);
+        estado = Estados.PENSANDO;
+
+        System.out.println("Filosofo " + (filosofo + 1) + " " + estado);
+        mesa.notificarCambios();
         sleep(3, 1);
 
     }
 
     public void esperando() {
         estado = Estados.ESPERANDO;
-        mesa.actualizarFilosofo(filosofo, Estados.ESPERANDO);
 
-        System.out.println("Filosofo " + filosofo + " " + estado);
-
+        System.out.println("Filosofo " + (filosofo + 1) + " " + estado);
+        mesa.notificarCambios();
     }
 
     public void comiendo() {
-        estado = Estados.COMIENDO;
         mesa.ocuparTenedores(filosofo);
-        mesa.actualizarFilosofo(filosofo, Estados.COMIENDO);
+        estado = Estados.COMIENDO;
 
-        System.out.println("Filosofo " + filosofo + " " + estado);
+        System.out.println("Filosofo " + (filosofo + 1) + " " + estado);
+        mesa.notificarCambios();
         sleep(6, 2);
     }
 
@@ -75,7 +74,7 @@ public class Filosofo extends Thread {
     public void setEstado(Estados estado) {
         this.estado = estado;
     }
-    
+
     public void setPausa(boolean valor) {
         this.pausa = valor;
     }

@@ -5,23 +5,20 @@ import java.awt.Color;
 public class PanelFilosofo extends javax.swing.JPanel {
 
     private final int idFilosofo;
+    private String ultimoEstado;
 
     public PanelFilosofo(int i) {
         initComponents();
         this.idFilosofo = i;
+        this.ultimoEstado = "Esta durmiendo.";
         this.lblFilosofo.setText(this.lblFilosofo.getText() + this.idFilosofo);
     }
 
-    public void historialPensar() {
-        textHistorialFilofoso.setText(textHistorialFilofoso.getText() + "Filosofo " + this.idFilosofo + ": Pensando...\n");
-    }
-
-    public void historialEsperar() {
-        textHistorialFilofoso.setText(textHistorialFilofoso.getText() + "Filosofo " + this.idFilosofo + ": Esperando...\n");
-    }
-
-    public void historialComer() {
-        textHistorialFilofoso.setText(textHistorialFilofoso.getText() + "Filosofo " + this.idFilosofo + ": Comiendo...\n");
+    public void setHistorial(String historial) {
+        if (!ultimoEstado.equals(historial)) {
+            textHistorialFilofoso.append("Filosofo " + this.idFilosofo + ": " + historial + "\n");
+            ultimoEstado = historial;
+        }
     }
 
     public void pensar() {
@@ -29,23 +26,23 @@ public class PanelFilosofo extends javax.swing.JPanel {
         this.pnlEsperando.setBackground(Bamarillo());
         this.pnlPensando.setBackground(Fverde());
 
-        this.historialPensar();
+        this.setHistorial("Esta durmiendo.");
     }
 
     public void esperar() {
         this.pnlComiendo.setBackground(Brojo());
         this.pnlEsperando.setBackground(Famarillo());
         this.pnlPensando.setBackground(Bverde());
-        
-        this.historialEsperar();
+
+        this.setHistorial("Esta esperando.");
     }
 
     public void comer() {
         this.pnlComiendo.setBackground(Frojo());
         this.pnlEsperando.setBackground(Bamarillo());
         this.pnlPensando.setBackground(Bverde());
-        
-        this.historialComer();
+
+        this.setHistorial("Esta comiendo.");
     }
 
     // <editor-fold defaultstate="collapsed" desc="-- Colores estados --">  
@@ -54,15 +51,15 @@ public class PanelFilosofo extends javax.swing.JPanel {
     }
 
     public Color Brojo() {
-        return new Color(255, 204, 204);
+        return new Color(255, 240, 240);
     }
 
     public Color Famarillo() {
-        return new Color(255, 255, 0);
+        return new Color(255, 200, 0);
     }
 
     public Color Bamarillo() {
-        return new Color(255, 255, 204);
+        return new Color(255, 255, 240);
     }
 
     public Color Fverde() {
@@ -70,7 +67,7 @@ public class PanelFilosofo extends javax.swing.JPanel {
     }
 
     public Color Bverde() {
-        return new Color(204, 255, 204);
+        return new Color(240, 255, 240);
     }// </editor-fold> 
 
     @SuppressWarnings("unchecked")
@@ -112,7 +109,7 @@ public class PanelFilosofo extends javax.swing.JPanel {
 
         pnlFilosofo1Estados.add(pnlPensando);
 
-        pnlEsperando.setBackground(new java.awt.Color(255, 255, 204));
+        pnlEsperando.setBackground(new java.awt.Color(255, 255, 230));
 
         javax.swing.GroupLayout pnlEsperandoLayout = new javax.swing.GroupLayout(pnlEsperando);
         pnlEsperando.setLayout(pnlEsperandoLayout);
@@ -127,7 +124,7 @@ public class PanelFilosofo extends javax.swing.JPanel {
 
         pnlFilosofo1Estados.add(pnlEsperando);
 
-        pnlComiendo.setBackground(new java.awt.Color(255, 204, 204));
+        pnlComiendo.setBackground(new java.awt.Color(255, 230, 230));
 
         javax.swing.GroupLayout pnlComiendoLayout = new javax.swing.GroupLayout(pnlComiendo);
         pnlComiendo.setLayout(pnlComiendoLayout);

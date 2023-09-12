@@ -6,23 +6,28 @@ import logica.Mesa;
 import librerias.ImageHandler;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static logica.Estados.COMIENDO;
 import static logica.Estados.ESPERANDO;
 import static logica.Estados.PENSANDO;
+import logica.Filosofo;
+import logica.MesaListener;
 
-public class UIFilosofos extends javax.swing.JFrame {
+public class UIFilosofos extends javax.swing.JFrame implements MesaListener {
 
     private ImageHandler objImagen;
-    private final Mesa objMesa;
+    private final Mesa mesa;
     private PanelFilosofo[] panelesFilosofos;
 
+    // <editor-fold defaultstate="collapsed" desc="Constructor e Inicializadores"> 
     public UIFilosofos() {
         initComponents();
         initImagenes();
         initPaneles();
-        this.objMesa = new Mesa(this);
+        this.mesa = new Mesa();
+        this.mesa.addMesaListener(this);
     }
 
     public void initImagenes() {
@@ -41,6 +46,46 @@ public class UIFilosofos extends javax.swing.JFrame {
             pnlContenedorPaneles.add(panelesFilosofos[i]);
         }
     }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Actualizar UI">
+    @Override
+    public void mesaActualizada(List<Filosofo> filosofos, Estados[] tenedores) {
+        actualizarFilosofos(filosofos);
+        actualizarTenedores(tenedores);
+    }
+
+    public void actualizarFilosofos(List<Filosofo> filosofos) {
+        for (int i = 0; i < filosofos.size(); i++) {
+            Estados estado = filosofos.get(i).getEstado();
+
+            switch (estado) {
+                case COMIENDO:
+                    comerFilosofo(i);
+                    panelesFilosofos[i].comer();
+                    break;
+                case ESPERANDO:
+                    esperarFilosofo(i);
+                    panelesFilosofos[i].esperar();
+                    break;
+                case PENSANDO:
+                    pensarFilosofo(i);
+                    panelesFilosofos[i].pensar();
+                    break;
+            }
+        }
+    }
+
+    public void actualizarTenedores(Estados[] tenedores) {
+        for (int i = 0; i < 5; i++) {
+            if (tenedores[i] == Estados.OCUPADO) {
+                ocuparTenedor(i);
+            } else if (tenedores[i] == Estados.LIBRE) {
+                liberarTenedor(i);
+            }
+        }
+    }
+    // </editor-fold>
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -188,49 +233,25 @@ public class UIFilosofos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Eventos">
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
 
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
     private void btnPausarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPausarActionPerformed
-        objMesa.pausarFilosofos(true);
+        mesa.pausarFilosofos();
     }//GEN-LAST:event_btnPausarActionPerformed
 
     private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReanudarActionPerformed
-        objMesa.pausarFilosofos(false);
+        mesa.reanudarFilosofos();
     }//GEN-LAST:event_btnReanudarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        objMesa.iniciar();
+        mesa.iniciar();
         btnIniciar.setEnabled(false);
     }//GEN-LAST:event_btnIniciarActionPerformed
-
-    public void actualizarUI(Estados[] filosofos, Estados[] tenedores) {
-        for (int i = 0; i < 5; i++) {
-
-            switch (filosofos[i]) {
-                case COMIENDO:
-                    comerFilosofo(i);
-                    panelesFilosofos[i].comer();
-                    break;
-                case ESPERANDO:
-                    esperarFilosofo(i);
-                    panelesFilosofos[i].esperar();
-                    break;
-                case PENSANDO:
-                    pensarFilosofo(i);
-                    panelesFilosofos[i].pensar();
-                    break;
-            }
-
-            if (tenedores[i] == Estados.OCUPADO) {
-                ocuparTenedor(i);
-            } else if (tenedores[i] == Estados.LIBRE) {
-                liberarTenedor(i);
-            }
-        }
-    }
-
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="-- Estados filosofos --">  
     private void comerFilosofo(int filosofoId) {
         getImagenFilosofo(filosofoId).setIcon(objImagen.redimencionarImagen("comiendo.png", new Dimension(60, 60)));

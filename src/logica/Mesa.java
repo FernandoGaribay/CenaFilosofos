@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import main.UIFilosofos;
 
 public class Mesa {
 
     private List<Filosofo> filosofos;
     private Estados[] tenedores;
-    private UIFilosofos ui;
+    private List<MesaListener> listeners;
 
-    public Mesa(UIFilosofos ui) {
+    public Mesa() {
         this.filosofos = new ArrayList<>(5);
         this.tenedores = new Estados[5];
-        this.ui = ui;
+        this.listeners = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
             filosofos.add(new Filosofo(this, i));
@@ -29,11 +28,22 @@ public class Mesa {
         }
     }
 
+    public synchronized void addMesaListener(MesaListener listener) {
+        listeners.add(listener);
+    }
+
+    public void notificarCambios() {
+        for (MesaListener listener : listeners) {
+            listener.mesaActualizada(filosofos, tenedores);
+        }
+    }
+
     public synchronized void ocuparTenedores(int filosofo) {
 
         while (tenedores[tenedorIzquierda(filosofo)] == Estados.OCUPADO
                 || tenedores[tenedorDerecha(filosofo)] == Estados.OCUPADO) {
             try {
+                notificarCambios();
                 wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,11 +60,6 @@ public class Mesa {
         notifyAll();
     }
 
-    public synchronized void actualizarFilosofo(int i, Estados estado) {
-        filosofos.get(i).setEstado(estado);
-        ui.actualizarUI(filosofos, tenedores);
-    }
-
     public int tenedorIzquierda(int tenedor) {
         return tenedor;
     }
@@ -63,9 +68,15 @@ public class Mesa {
         return (tenedor + 1) % 5;
     }
 
-    public void pausarFilosofos(boolean valor) {
+    public void pausarFilosofos() {
         for (int i = 0; i < 5; i++) {
-            objFilosofos[i].setPausa(valor);
+            filosofos.get(i).suspend();
+        }
+    }
+
+    public void reanudarFilosofos() {
+        for (int i = 0; i < 5; i++) {
+            filosofos.get(i).resume();
         }
     }
 }
